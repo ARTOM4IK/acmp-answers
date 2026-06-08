@@ -1,61 +1,57 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
-int main() 
+int main( void )
 {
-    int a, b, c;
+    long long a, b, c;
     std::cin >> a >> b >> c;
 
-    if (a == 0) 
+    if (a == 0)
     {
-        if (b == 0) 
+        if (b == 0)
         {
             if (c == 0)
             {
-                std::cout << -1 << std::endl;
+                std::cout << -1;
             }
             else
             {
-                std::cout << 0 << std::endl;
+                std::cout << 0;
             }
-        } 
-        else 
+        }
+        else
         {
-            double root = -double(c) / b;
-            std::cout << 1 << std::endl;
-            std::cout << root << std::endl;
+            std::cout << 1 << '\n';
+            std::cout << std::fixed << std::setprecision(6) << -(double)c / b;
         }
         return 0;
     }
 
-    int discriminant = b * b - 4 * a * c;
+    long long d = 1LL * b * b - 4LL * a * c;
 
-    if (discriminant > 0)
+    if (d < 0)
     {
-        double sqrt_discr = std::sqrt(discriminant);
-        double root1 = (-b + sqrt_discr) / (2.0 * a);
-        double root2 = (-b - sqrt_discr) / (2.0 * a);
+        std::cout << 0;
+    }
+    else if (d == 0)
+    {
+        std::cout << 1 << '\n';
+        std::cout << std::fixed << std::setprecision(6) << -(double)b / (2.0 * a);
+    }
+    else
+    {
+        double sd = std::sqrt((double)d);
 
-        if (root1 < root2)
+        double x1 = (-b - sd) / (2.0 * a);
+        double x2 = (-b + sd) / (2.0 * a);
+
+        if (x1 > x2)
         {
-            std::cout << 2 << std::endl;
-            std::cout << root1 << std::endl << root2 << std::endl;
-        } 
-        else
-        {
-            std::cout << 2 << std::endl;
-            std::cout << root2 << std::endl << root1 << std::endl;
+            std::swap(x1, x2);
         }
-    } 
-    else if (discriminant == 0) 
-    {
-        double root = -b / (2.0 * a);
-        std::cout << 1 << std::endl;
-        std::cout << root << std::endl;
-    } 
-    else 
-    {
-        std::cout << 0 << std::endl;
+        std::cout << 2 << '\n';
+        std::cout << std::fixed << std::setprecision(6) << x1 << '\n' << x2;
     }
 
     return 0;
