@@ -1,6 +1,7 @@
 #include <iostream>
 
-struct point{
+struct point
+{
     int x1;
     int x2;
     int y1;
